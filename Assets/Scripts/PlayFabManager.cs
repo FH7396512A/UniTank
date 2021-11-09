@@ -22,6 +22,7 @@ public class PlayFabManager : MonoBehaviour
     string patternName = @"^[0-9a-zA-Z]{2,20}$";//이름 영어 숫자로 구성 2-20자
     string patternNN = @"^[0-9a-zA-Z가-힣]{3,8}$";//닉네임 숫자 영어 한글 영어로 구성 3-8자
     //버튼입력 로그인
+
     public void Login_Button()
     {
         var request = new LoginWithEmailAddressRequest { Email = ID_Input.text, Password = PW_Input.text };
@@ -108,5 +109,6 @@ public class PlayFabManager : MonoBehaviour
         Debug.LogError("로그인 실패");
     }
 }
+
 
 
