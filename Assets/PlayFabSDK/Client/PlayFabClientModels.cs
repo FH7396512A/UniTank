@@ -5527,6 +5527,8 @@ namespace PlayFab.ClientModels
         /// PlayFab unique user name.
         /// </summary>
         public string Username;
+
+        public string PlayFabID { get; set; }
     }
 
     /// <summary>
