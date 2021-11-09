@@ -6,6 +6,7 @@ using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 public class PlayFabManager : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class PlayFabManager : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
     }
-    public string PlayFabID, DisplayName;
+    public string _PlayFabID, _DisplayName;
     public InputField ID_Input, PW_Input, Create_ID_Input, Create_PW_Input, Create_Name_Input, Create_NN_Input;
 
     string patternID = @"^[\w.%+\-]+@[\w.\-]+\.[A-Za-z]{2,3}$";//이메일 형식
@@ -61,14 +62,28 @@ public class PlayFabManager : MonoBehaviour
             DisplayName = Create_NN_Input.text
         }, result => {
             Debug.Log("The player's display name is now: " + result.DisplayName);
-            DisplayName = result.DisplayName;
+        }, error => Debug.LogError(error.GenerateErrorReport()));
+    }
+
+    void GetPlayerProfile(string playFabId)
+    {
+        PlayFabClientAPI.GetPlayerProfile(new GetPlayerProfileRequest()
+        {
+            PlayFabId = playFabId,
+            ProfileConstraints = new PlayerProfileViewConstraints()
+            {
+                ShowDisplayName = true
+            }
+        },
+        result => {
+            Debug.Log("The player's DisplayName profile data is: " + result.PlayerProfile.DisplayName);
+            _DisplayName = result.PlayerProfile.DisplayName;
         }, error => Debug.LogError(error.GenerateErrorReport()));
     }
 
     private void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
         Debug.Log("회원가입 성공");
-        PlayFabID = result.PlayFabID;
         UpdateDisplayName();
     }
     private void OnRegisterFailure(PlayFabError error)
@@ -77,8 +92,15 @@ public class PlayFabManager : MonoBehaviour
     }
     private void OnLoginSuccess(LoginResult result)
     {
+        PlayFabClientAPI.GetAccountInfo(new GetAccountInfoRequest { Email = ID_Input.text },
+            results => {
+                //Handle AccountInfo
+                Debug.Log(results.AccountInfo.PlayFabId);
+                _PlayFabID = results.AccountInfo.PlayFabId;
+            }, errors => { Debug.LogError(errors.GenerateErrorReport()); });
+        GetPlayerProfile(_PlayFabID);
         Debug.Log("로그인 성공");
-        
+        Task.Delay(1000).Wait();
         SceneManager.LoadScene("Lobby");
     }
     private void OnLoginFailure(PlayFabError error)
@@ -86,3 +108,5 @@ public class PlayFabManager : MonoBehaviour
         Debug.LogError("로그인 실패");
     }
 }
+
+
