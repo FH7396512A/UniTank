@@ -269,6 +269,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 62104678}
+  - component: {fileID: 62104679}
   m_Layer: 5
   m_Name: CreateID
   m_TagString: Untagged
@@ -300,6 +301,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -41}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &62104679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 62104677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dfe8993db17c4848aa4a976ec59cd07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectables: []
 --- !u!1 &357963594
 GameObject:
   m_ObjectHideFlags: 0
@@ -2144,6 +2158,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1658574698}
+  - component: {fileID: 1658574699}
   m_Layer: 5
   m_Name: Login
   m_TagString: Untagged
@@ -2173,6 +2188,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1658574699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658574697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dfe8993db17c4848aa4a976ec59cd07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectables: []
 --- !u!1 &1659560847
 GameObject:
   m_ObjectHideFlags: 0
@@ -2478,7 +2506,6 @@ GameObject:
   - component: {fileID: 1751324205}
   - component: {fileID: 1751324204}
   - component: {fileID: 1751324203}
-  - component: {fileID: 1751324207}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2570,19 +2597,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1751324207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1751324202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dfe8993db17c4848aa4a976ec59cd07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectables: []
 --- !u!1 &1819569513
 GameObject:
   m_ObjectHideFlags: 0
