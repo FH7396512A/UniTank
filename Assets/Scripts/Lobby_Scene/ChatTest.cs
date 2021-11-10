@@ -19,7 +19,7 @@ public class ChatTest : MonoBehaviour, IChatClientListener {
 		
 		Application.runInBackground = true;
 
-		userName = GameObject.Find("PlayFabManager").GetComponent<PlayFabManager>()._DisplayName;
+		userName = GameObject.Find("UserInfo").GetComponent<UserInfo>()._DisplayName;
 		currentChannelName = "UniTank";
 
 		chatClient = new ChatClient(this);

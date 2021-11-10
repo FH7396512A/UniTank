@@ -9,10 +9,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayFabManager : MonoBehaviour
 {
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
     public string _PlayFabID, _DisplayName = null;
     public InputField ID_Input, PW_Input, Create_ID_Input, Create_PW_Input, Create_Name_Input, Create_NN_Input;
 
@@ -79,6 +75,7 @@ public class PlayFabManager : MonoBehaviour
         result => {
             Debug.Log("The player's DisplayName profile data is: " + result.PlayerProfile.DisplayName);
             _DisplayName = result.PlayerProfile.DisplayName;
+            GameObject.Find("UserInfo").GetComponent<UserInfo>()._DisplayName = _DisplayName;
             ///
             SceneManager.LoadScene("Lobby");
         }, error => Debug.LogError(error.GenerateErrorReport()));
@@ -101,6 +98,7 @@ public class PlayFabManager : MonoBehaviour
                 //Handle AccountInfo
                 Debug.Log(results.AccountInfo.PlayFabId);
                 _PlayFabID = results.AccountInfo.PlayFabId;
+                GameObject.Find("UserInfo").GetComponent<UserInfo>()._PlayFabID = _PlayFabID;
             }, errors => { Debug.LogError(errors.GenerateErrorReport()); });
         Debug.Log("로그인 성공");
         GetPlayerProfile(_PlayFabID);
