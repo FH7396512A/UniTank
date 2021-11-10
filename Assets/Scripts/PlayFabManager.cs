@@ -6,7 +6,6 @@ using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Threading.Tasks;
 
 public class PlayFabManager : MonoBehaviour
 {
@@ -80,6 +79,8 @@ public class PlayFabManager : MonoBehaviour
         result => {
             Debug.Log("The player's DisplayName profile data is: " + result.PlayerProfile.DisplayName);
             _DisplayName = result.PlayerProfile.DisplayName;
+            ///
+            SceneManager.LoadScene("Lobby");
         }, error => Debug.LogError(error.GenerateErrorReport()));
     }
 
@@ -101,10 +102,8 @@ public class PlayFabManager : MonoBehaviour
                 Debug.Log(results.AccountInfo.PlayFabId);
                 _PlayFabID = results.AccountInfo.PlayFabId;
             }, errors => { Debug.LogError(errors.GenerateErrorReport()); });
-        GetPlayerProfile(_PlayFabID);
         Debug.Log("로그인 성공");
-        Task.Delay(1000).Wait();
-        SceneManager.LoadScene("Lobby");
+        GetPlayerProfile(_PlayFabID);
     }
 
     private void OnLoginFailure(PlayFabError error)
