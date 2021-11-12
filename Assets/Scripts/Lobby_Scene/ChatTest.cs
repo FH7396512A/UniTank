@@ -19,8 +19,8 @@ public class ChatTest : MonoBehaviour, IChatClientListener {
 		
 		Application.runInBackground = true;
 
-		userName = GameObject.Find("PlayFabManager").GetComponent<PlayFabManager>()._DisplayName;
-		currentChannelName = "Channel 001";
+		userName = GameObject.Find("UserInfo").GetComponent<UserInfo>()._DisplayName;
+		currentChannelName = "UniTank";
 
 		chatClient = new ChatClient(this);
 		chatClient.Connect(ChatSettings.Instance.AppId, "1.0", new AuthenticationValues(userName));
@@ -61,8 +61,7 @@ public class ChatTest : MonoBehaviour, IChatClientListener {
 	{
 		AddLine ("서버에 연결되었습니다.");
 
-		//chatClient.Subscribe(new string[]{currentChannelName}, 10);
-		chatClient.Subscribe(new string[]{currentChannelName, "Channel 002"}, 10);
+		chatClient.Subscribe(new string[]{currentChannelName}, 10);
 
 
 		chatClient.SetOnlineStatus(ChatUserStatus.Offline, null);
@@ -115,14 +114,13 @@ public class ChatTest : MonoBehaviour, IChatClientListener {
 
 	public void Input_OnEndEdit (string text)
 	{
-		if (chatClient.State == ChatState.ConnectedToFrontEnd)
+		if (inputField.text != "" && chatClient.State == ChatState.ConnectedToFrontEnd)
 		{
 			// public
 			chatClient.PublishMessage(currentChannelName, inputField.text);
 
 			// private
 			//chatClient.SendPrivateMessage("ethan", inputField.text);
-
 
 			inputField.text = "";
 		}
