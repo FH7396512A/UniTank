@@ -11,11 +11,14 @@ public class PlayFabManager : MonoBehaviour
 {
     public string _PlayFabID, _DisplayName = null;
     public InputField ID_Input, PW_Input, Create_ID_Input, Create_PW_Input, Create_Name_Input, Create_NN_Input;
-
-    string patternID = @"^[\w.%+\-]+@[\w.\-]+\.[A-Za-z]{2,3}$";//이메일 형식
-    string patternPW = @"^[0-9a-zA-Z!@#$%&*]{6,20}$";//패스워드 영어 숫자 특수문자로 구성 6-20자
-    string patternName = @"^[0-9a-zA-Z]{2,20}$";//이름 영어 숫자로 구성 2-20자
-    string patternNN = @"^[0-9a-zA-Z가-힣]{3,8}$";//닉네임 숫자 영어 한글 영어로 구성 3-8자
+    //이메일 형식
+    string patternID = @"^[\w.%+\-]+@[\w.\-]+\.[A-Za-z]{2,3}$";
+    //패스워드 영어 숫자 특수문자로 구성 6-20자
+    string patternPW = @"^[0-9a-zA-Z!@#$%&*]{6,20}$";
+    //이름 영어 숫자로 구성 2-20자
+    string patternName = @"^[0-9a-zA-Z]{2,20}$";
+    //닉네임 숫자 영어 한글 영어로 구성 3-8자
+    string patternNN = @"^[0-9a-zA-Z가-힣]{3,8}$";
 
     //버튼입력 로그인
     public void Login_Button()
