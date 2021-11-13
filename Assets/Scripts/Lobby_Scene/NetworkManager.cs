@@ -85,13 +85,20 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             roomDict.Add(myList[i].Name, _room);
             _room.transform.GetChild(0).GetComponent<Text>().text = myList[i].Name;
             _room.transform.GetChild(1).GetComponent<Text>().text = myList[i].PlayerCount + "/" + myList[i].MaxPlayers;
-            _room.GetComponent<Button>().onClick.AddListener(() => OnEnterRoom(myList[i].Name));
+            _room.GetComponent<Button>().onClick.AddListener
+            (
+                delegate
+                {
+                    OnEnterRoom(myList[i].Name);
+                }
+            );
             roomPrefabs.Add(_room);
         }
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
+        
         int roomCount = roomList.Count;
         for (int i = 0; i < roomCount; i++)
         {
@@ -229,8 +236,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #region 채팅 //
     public void Send()
     {
-        PV.RPC("ChatRPC", RpcTarget.All, PhotonNetwork.NickName + " : " + ChatInput.text);
-        ChatInput.text = "";
+        if (ChatInput.text != "")
+        {
+            PV.RPC("ChatRPC", RpcTarget.All, PhotonNetwork.NickName + " : " + ChatInput.text);
+            ChatInput.text = "";
+        }
     }
 
     [PunRPC] // RPC는 플레이어가 속해있는 방 모든 인원에게 전달한다
