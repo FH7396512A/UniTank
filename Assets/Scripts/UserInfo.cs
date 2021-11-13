@@ -8,5 +8,9 @@ public class UserInfo : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
     }
-    public string _DisplayName, _PlayFabID;
+    public static string _DisplayName, _PlayFabID;
+    public string GetDisplayName()
+    {
+        return _DisplayName;
+    }
 }
