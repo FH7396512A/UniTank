@@ -28,6 +28,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public Transform UserContent;
     public GameObject UserPrefab;
     private List<GameObject> userPrefabs = new List<GameObject>();
+    private List<GameObject> roomPrefabs = new List<GameObject>();
 
     [Header("ETC")]
     public PhotonView PV;
@@ -51,17 +52,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         OnConnectedToMaster();
         PhotonNetwork.NickName = UserInfo._DisplayName;
     }
-    /*
-    public override void OnConnectedToMaster()
-    {
-        Debug.Log("서버 접속");
-        PhotonNetwork.JoinLobby();
-    }
-    public override void OnJoinedLobby()
-    {
-        Debug.Log("로비 접속");
-    }
-    */
+
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         Debug.Log("랜덤룸 접속 실패");
@@ -78,40 +69,56 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("방 생성 완료");
     }
-    /*
-    public override void OnJoinedRoom()
+    void MyListRenewal()
     {
-        Debug.Log("방 입장 완료");
-        LobbyPanel.gameObject.SetActive(false);
-        RoomPanel.gameObject.SetActive(true);
+        if (roomPrefabs.Count > 0)
+        {
+            for (int i = 0; i < roomPrefabs.Count; i++)
+            {
+                Destroy(roomPrefabs[i]);
+            }
+            roomPrefabs.Clear();
+        }
+        for (int i = 0; i < myList.Count; i++)
+        {
+            GameObject _room = Instantiate(RoomPrefab, scrollContent);
+            roomDict.Add(myList[i].Name, _room);
+            _room.transform.GetChild(0).GetComponent<Text>().text = myList[i].Name;
+            _room.transform.GetChild(1).GetComponent<Text>().text = myList[i].PlayerCount + "/" + myList[i].MaxPlayers;
+            _room.GetComponent<Button>().onClick.AddListener(() => OnEnterRoom(myList[i].Name));
+            roomPrefabs.Add(_room);
+        }
     }
-    */
+
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        GameObject tempRoom = null;
-        foreach (var room in roomList)
+        int roomCount = roomList.Count;
+        for (int i = 0; i < roomCount; i++)
         {
-            if (room.RemovedFromList == true)
+            if (!roomList[i].RemovedFromList)
             {
-                roomDict.TryGetValue(room.Name, out tempRoom);
-                Destroy(tempRoom);
-                roomDict.Remove(room.Name);
+                if (!myList.Contains(roomList[i])) myList.Add(roomList[i]);
+                else myList[myList.IndexOf(roomList[i])] = roomList[i];
             }
-            else
-            {
-                if (roomDict.ContainsKey(room.Name) == false)
-                {
-                    GameObject _room = Instantiate(RoomPrefab, scrollContent);
-                    _room.GetComponent<RoomData>().RoomInfo = room;
-                    roomDict.Add(room.Name, _room);
-                }
-                else
-                {
-                    roomDict.TryGetValue(room.Name, out tempRoom);
-                    tempRoom.GetComponent<RoomData>().RoomInfo = room;
-                }
-            }
+            else if (myList.IndexOf(roomList[i]) != -1) myList.RemoveAt(myList.IndexOf(roomList[i]));
         }
+        MyListRenewal();
+    }
+
+    void OnEnterRoom(string roomName)
+    {
+        RoomOptions ro = new RoomOptions();
+        ro.IsOpen = true;
+        ro.IsVisible = true;
+        ro.MaxPlayers = 4;
+
+        PhotonNetwork.NickName = UserInfo._DisplayName;
+        LobbyPanel.gameObject.SetActive(false);
+        RoomPanel.gameObject.SetActive(true);
+        StatusPanel.gameObject.SetActive(true);
+        _CreateRoom.gameObject.SetActive(false);
+        _StatusText.gameObject.SetActive(true);
+        PhotonNetwork.JoinOrCreateRoom(roomName, ro, TypedLobby.Default);
     }
 
     #endregion
@@ -128,19 +135,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         _StatusText.gameObject.SetActive(true);
         PhotonNetwork.JoinRandomRoom();
     }
-    /*
-    public void OnMakeRoomClick() 
-    {
-        _CreateRoom.gameObject.SetActive(false);
-        _StatusText.gameObject.SetActive(true);
-        RoomOptions ro = new RoomOptions();
-        ro.IsOpen = true;
-        ro.IsVisible = true;
-        ro.MaxPlayers = 4;
-        PhotonNetwork.CreateRoom(RoomInput.text, ro);
-    }
-    */
-
     #endregion
 
     #region 서버연결 //
