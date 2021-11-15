@@ -1966,6 +1966,7 @@ RectTransform:
   m_Children:
   - {fileID: 2138745239}
   - {fileID: 383386317}
+  - {fileID: 698611961}
   m_Father: {fileID: 2032910076}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2560,16 +2561,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 698611960}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1774.875}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2131320479}
-  m_Father: {fileID: 1984888215}
-  m_RootOrder: 0
+  m_Father: {fileID: 389731379}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 180, y: -215}
+  m_AnchoredPosition: {x: 17.281372, y: -195.69064}
   m_SizeDelta: {x: 120, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &698611962
@@ -2615,7 +2616,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1984888214}
+      - m_Target: {fileID: 1752547584}
         m_MethodName: BackButtonOnClicked
         m_Mode: 1
         m_Arguments:
@@ -5450,7 +5451,6 @@ MonoBehaviour:
   LobbyPanel: {fileID: 389731378}
   StatusText: {fileID: 2091442127}
   CreateRoom: {fileID: 1752547582}
-  BackButton: {fileID: 698611960}
 --- !u!1 &1768497232
 GameObject:
   m_ObjectHideFlags: 0
@@ -5852,7 +5852,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1752547584}
         m_MethodName: CreateBtnClicked
         m_Mode: 1
         m_Arguments:
@@ -6544,50 +6544,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971679517}
   m_CullTransparentMesh: 0
---- !u!1 &1984888213
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1984888215}
-  - component: {fileID: 1984888214}
-  m_Layer: 0
-  m_Name: LobbyBackButton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1984888214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1984888213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc44f28bcb29fd6429a881a4f2820677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1984888215
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1984888213}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -162.71861, y: 19.309357, z: -1774.875}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 698611961}
-  m_Father: {fileID: 2032910076}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1985837610
 GameObject:
   m_ObjectHideFlags: 0
@@ -6837,7 +6793,6 @@ RectTransform:
   - {fileID: 389731379}
   - {fileID: 797067986}
   - {fileID: 988068850}
-  - {fileID: 1984888215}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

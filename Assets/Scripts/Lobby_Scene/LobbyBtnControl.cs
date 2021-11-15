@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LobbyBtnControl : MonoBehaviour
 {
     public GameObject CreateBtn, CreateFinishBtn, LobbyPanel, StatusText,
-        CreateRoom, BackButton;
+        CreateRoom;
 
     public void CreateBtnClicked()
     {
@@ -14,10 +15,10 @@ public class LobbyBtnControl : MonoBehaviour
         LobbyPanel.gameObject.SetActive(false);
         StatusText.gameObject.SetActive(false);
         CreateRoom.gameObject.SetActive(true);
-        BackButton.gameObject.SetActive(true);
     }
-    public void BackButtonClicked()
+    public void BackButtonOnClicked()
     {
-        Debug.Log("aa");
+        Debug.Log("Back to Main");
+        SceneManager.LoadScene("Main");
     }
 }
