@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LobbyBtnControl : MonoBehaviour
 {
@@ -14,5 +15,10 @@ public class LobbyBtnControl : MonoBehaviour
         LobbyPanel.gameObject.SetActive(false);
         StatusText.gameObject.SetActive(false);
         CreateRoom.gameObject.SetActive(true);
+    }
+    public void BackButtonOnClicked()
+    {
+        Debug.Log("Back to Main");
+        SceneManager.LoadScene("Main");
     }
 }
