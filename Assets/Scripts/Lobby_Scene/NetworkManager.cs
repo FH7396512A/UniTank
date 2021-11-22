@@ -5,13 +5,14 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     [Header("LobbyPanel")]
     public GameObject LobbyPanel;
-    public Text LobbyInfoText;
+    public TMP_Text LobbyInfoText;
 
     private Dictionary<string, GameObject> roomDict = new Dictionary<string, GameObject>();
     public InputField RoomInput;
@@ -22,7 +23,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public GameObject RoomPanel;
     public GameObject StatusPanel;
     public Text ListText;
-    public Text RoomInfoText;
+    public TMP_Text RoomInfoText;
     public Text[] ChatText;
     public InputField ChatInput;
     public Transform UserContent;
@@ -35,7 +36,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public GameObject _CreateRoom;
     public GameObject _StatusText;
-    public Text _StatusT;
+    public TMP_Text _StatusT;
 
     List<RoomInfo> myList = new List<RoomInfo>();
 
