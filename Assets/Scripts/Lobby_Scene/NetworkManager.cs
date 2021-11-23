@@ -72,6 +72,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     void MyListRenewal()
     {
+        if (roomDict.Count >0)
+        {
+            roomDict.Clear();
+        }
+
         if (roomPrefabs.Count > 0)
         {
             for (int i = 0; i < roomPrefabs.Count; i++)
@@ -82,6 +87,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
         for (int i = 0; i < myList.Count; i++)
         {
+            int temp = i;
             GameObject _room = Instantiate(RoomPrefab, scrollContent);
             roomDict.Add(myList[i].Name, _room);
             _room.transform.GetChild(0).GetComponent<Text>().text = myList[i].Name;
@@ -90,7 +96,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             (
                 delegate
                 {
-                    OnEnterRoom(myList[i].Name);
+                    OnEnterRoom(myList[temp].Name);
                 }
             );
             roomPrefabs.Add(_room);
@@ -99,7 +105,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        
         int roomCount = roomList.Count;
         for (int i = 0; i < roomCount; i++)
         {
