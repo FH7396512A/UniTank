@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ChatSettingsFile
   m_EditorClassIdentifier: 
   AppId: 4ed52c88-d0bf-4cc4-8e91-cf6fb5c32215
-  WizardDone: 1
+  WizardDone: 0
