@@ -9,7 +9,7 @@ public class LobbyBtnControl : MonoBehaviour
     public GameObject CreateBtn, CreateFinishBtn, LobbyPanel, StatusText,
         CreateRoom, SoundControlButton, SoundControlBackButton;
     public Slider VolumeSlider;
-    public AudioSource audio;
+    public AudioSource _audio;
     private float VolumeValue = 1f;
 
     public void CreateBtnClicked()
@@ -44,7 +44,7 @@ public class LobbyBtnControl : MonoBehaviour
     {
         VolumeValue = PlayerPrefs.GetFloat("VolumeValue", 1f);
         VolumeSlider.value = VolumeValue;
-        audio.volume = VolumeSlider.value;
+        _audio.volume = VolumeSlider.value;
     }
     void Update()
     {
@@ -52,7 +52,7 @@ public class LobbyBtnControl : MonoBehaviour
     }
     public void SoundSlider()
     {
-        audio.volume = VolumeSlider.value;
+        _audio.volume = VolumeSlider.value;
         VolumeValue = VolumeSlider.value;
         PlayerPrefs.SetFloat("VolumeValue", VolumeValue);
     }
