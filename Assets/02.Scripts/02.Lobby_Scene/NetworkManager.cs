@@ -96,7 +96,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             (
                 delegate
                 {
-                    OnEnterRoom(myList[temp].Name);
+                    if (myList[temp].PlayerCount < myList[temp].MaxPlayers) OnEnterRoom(myList[temp].Name);
                 }
             );
             roomPrefabs.Add(_room);
