@@ -11,12 +11,12 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        musics = GameObject.FindGameObjectsWithTag("BGMMixer");
+        musics = GameObject.FindGameObjectsWithTag("Music");
         if(musics.Length >=2)
         {
             Destroy(this.gameObject);
         }
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(transform.gameObject);
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -24,28 +24,4 @@ public class SoundManager : MonoBehaviour
     { if (audioSource.isPlaying) return; audioSource.Play(); }
     public void StopMusic()
     { audioSource.Stop(); }
-}
-    
-
-    //볼륨 설정
-    ////////////////////////////////////////////////////////////
-/*
-    private void Start()
-    {
-        VolumeValue = PlayerPrefs.GetFloat("VolumeValue", 1f);
-        VolumeSlider.value = VolumeValue;
-        _audio.volume = VolumeSlider.value;
-    }
-    void Update()
-    {
-        SoundSlider();
-    }
-    public void SoundSlider()
-    {
-        _audio.volume = VolumeSlider.value;
-        VolumeValue = VolumeSlider.value;
-        PlayerPrefs.SetFloat("VolumeValue", VolumeValue);
-    }
-
-}
-*/
+}  

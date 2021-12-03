@@ -1,28 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class SoundControlButton : MonoBehaviour
 {
-    public Slider VolumeSlider;
-    public AudioSource _audio;
+    public AudioMixer _mixer;
+    public Slider _slider;
     public GameObject SoundButton;
 
-    private void Start()
+    void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        _slider.value = PlayerPrefs.GetFloat("MusicVolume", 0.75f);
+    }
+
+    public void SetLevel(float sliderValue)
+    {
+        _mixer.SetFloat("MusicVolume", Mathf.Log10(sliderValue) * 20);
+        PlayerPrefs.SetFloat("MusicVolume", sliderValue);
     }
 
     public void SoundControlOnClicked()
     {
-        if (VolumeSlider.gameObject.activeSelf == true)
+        if (_slider.gameObject.activeSelf == true)
         {
-            VolumeSlider.gameObject.SetActive(false);
+            _slider.gameObject.SetActive(false);
         }
-        else if (VolumeSlider.gameObject.activeSelf == false)
+        else if (_slider.gameObject.activeSelf == false)
         {
-            VolumeSlider.gameObject.SetActive(true);
+            _slider.gameObject.SetActive(true);
         }
     }
 }

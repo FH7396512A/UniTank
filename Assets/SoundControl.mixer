@@ -20,7 +20,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BGMMixer
+  m_Name: Music
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: dbd2bb0c181bb654289c3ba3a8e27645
   m_Children: []
@@ -50,7 +50,7 @@ AudioMixerController:
   m_UpdateMode: 0
   m_ExposedParameters:
   - guid: be08528ca2660c645a9c4cbe2c8d6257
-    name: Music
+    name: MusicVolume
   m_AudioMixerGroupViews:
   - guids:
     - 40212918dc99bca438175e228e46ce89
