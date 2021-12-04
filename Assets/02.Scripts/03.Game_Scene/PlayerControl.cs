@@ -10,11 +10,18 @@ public class PlayerControl : MonoBehaviour
     int isRight;            //방향 변수 right = 1, left = -1
     float _angle;
 
-    private GameObject _PlayerInfo;
     private float _hp, _maxhp;
     private float _move, _maxmove;
+    [SerializeField]
+    public GameObject _PlayerInfo;
     public Slider _HpBar;
     public Slider _MoveBar;
+    public GameObject canvas;
+    RectTransform HPBar_t;
+    RectTransform MVBar_t;
+    RectTransform NameUI_t;
+    Slider HPBar_I;
+    Slider MVBar_I;
 
     public GameObject _Bullet;
     int delay = 0;
@@ -27,20 +34,32 @@ public class PlayerControl : MonoBehaviour
         transform.localScale = new Vector3(0.5f, 0.5f, 1);
         _angle = 0;
 
-        _PlayerInfo = GameObject.Find("Canvas/PlayerInfo");
         _maxmove = 100;
         _move = 100;
         _maxhp = 100;
         _hp = 100;
+
+        Slider HPB = Instantiate(_HpBar, canvas.transform);
+        HPBar_t = HPB.GetComponent<RectTransform>();
+        HPBar_I = HPB;
+        Slider MVB = Instantiate(_MoveBar, canvas.transform);
+        MVBar_t = MVB.GetComponent<RectTransform>();
+        MVBar_I = MVB;
+        NameUI_t = Instantiate(_PlayerInfo, canvas.transform).GetComponent<RectTransform>();
     }
 
     void Update()
     {
-        _PlayerInfo.transform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 0.7f, 0));
-        _HpBar.value = _hp / _maxhp;
-        _MoveBar.value = _move / _maxmove;
+        Vector3 HPBarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + 1.95f, 0));
+        HPBar_t.position = HPBarPos;
+        Vector3 MVBarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + 1.8f, 0));
+        MVBar_t.position = MVBarPos;
+        Vector3 NameUIPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y - 0.8f, 0));
+        NameUI_t.position = NameUIPos;
+        HPBar_I.value = _hp / _maxhp;
+        MVBar_I.value = _move / _maxmove;
 
-        timer += 1;
+        if (timer <= 120) timer += 1;
         if (timer > 120) delay = 0;
     }
 
@@ -81,10 +100,11 @@ public class PlayerControl : MonoBehaviour
             if (delay == 0)
             {
                 GameObject Bullet_Ins = Instantiate(_Bullet, transform.GetChild(0).GetChild(0));
-                Bullet_Ins.GetComponent<BulletControl>()._direction
-                    = transform.GetChild(0).GetChild(0).GetComponent<Transform>().position
-                    - transform.GetChild(2).GetComponent<Transform>().position;
-                if (isRight == -1) Bullet_Ins.GetComponent<BulletControl>()._direction.x
+                Vector3 a = transform.GetChild(0).GetChild(0).GetComponent<Transform>().position;
+                Vector3 b = transform.GetChild(2).GetComponent<Transform>().position;
+                Bullet_Ins.GetComponent<BulletControl>()._direction = a - b;
+                bool temp = isRight == 1 ? true : false;
+                if (!temp) Bullet_Ins.GetComponent<BulletControl>()._direction.x
                         = -Bullet_Ins.GetComponent<BulletControl>()._direction.x;
                 timer = 0;
                 delay = 1;
