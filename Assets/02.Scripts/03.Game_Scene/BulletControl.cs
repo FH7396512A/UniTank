@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class BulletControl : MonoBehaviour
 {
-    public float moveSpeed = 30.0f;
-    public int _isRight;
     public Vector3 _direction;
-    private Vector3 _dir;
     public GameObject Boom;
+    private float moveSpeed = 20.0f;
+    private float _G = 0.005f;
+    private Vector3 _Pos;
+    private Vector3 _ST;
+    private Vector3 _Gravity = new Vector3(0, 0, 0);
     void Start()
     {
-        _dir = _direction;
+        _Pos = _direction;
+        _ST = transform.position;
     }
 
     void OnCollisionEnter2D(Collision2D coll)
@@ -22,6 +25,8 @@ public class BulletControl : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(_dir * Time.deltaTime * moveSpeed);
+        _ST = _ST + _Pos * Time.deltaTime * moveSpeed - _Gravity;
+        transform.position = _ST;
+        _Gravity.y += _G;
     }
 }
