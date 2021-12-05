@@ -22,6 +22,7 @@ public class PlayerControl : MonoBehaviour
     RectTransform NameUI_t;
     Slider HPBar_I;
     Slider MVBar_I;
+    public float WheelRotateSpeed = 100f;
 
     public GameObject _Bullet;
     int delay = 0;
@@ -86,6 +87,8 @@ public class PlayerControl : MonoBehaviour
             //_move -= 1;
             transform.localScale = new Vector3(0.5f, 0.5f, 1);
             if (_move > 0) transform.position += Vector3.right * Time.deltaTime * _speed;
+            transform.GetChild(4).Rotate(0, 0, -Time.deltaTime * WheelRotateSpeed, Space.Self);
+            transform.GetChild(5).Rotate(0, 0, -Time.deltaTime * WheelRotateSpeed, Space.Self);
         }
         //leftArrow 누를 때 왼쪽 이동 / sprite 반전
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -94,6 +97,8 @@ public class PlayerControl : MonoBehaviour
             //_move -= 1;
             transform.localScale = new Vector3(-0.5f, 0.5f, 1);
             if (_move > 0) transform.position += Vector3.left * Time.deltaTime * _speed;
+            transform.GetChild(4).Rotate(0, 0, -Time.deltaTime * WheelRotateSpeed, Space.Self);
+            transform.GetChild(5).Rotate(0, 0, -Time.deltaTime * WheelRotateSpeed, Space.Self);
         }
         if (Input.GetKey(KeyCode.Space))
         {
