@@ -83,7 +83,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow))
         {
             isRight = 1;
-            _move -= 1;
+            //_move -= 1;
             transform.localScale = new Vector3(0.5f, 0.5f, 1);
             if (_move > 0) transform.position += Vector3.right * Time.deltaTime * _speed;
         }
@@ -91,7 +91,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             isRight = -1;
-            _move -= 1;
+            //_move -= 1;
             transform.localScale = new Vector3(-0.5f, 0.5f, 1);
             if (_move > 0) transform.position += Vector3.left * Time.deltaTime * _speed;
         }
@@ -103,9 +103,6 @@ public class PlayerControl : MonoBehaviour
                 Vector3 a = transform.GetChild(0).GetChild(0).GetComponent<Transform>().position;
                 Vector3 b = transform.GetChild(2).GetComponent<Transform>().position;
                 Bullet_Ins.GetComponent<BulletControl>()._direction = a - b;
-                bool temp = isRight == 1 ? true : false;
-                if (!temp) Bullet_Ins.GetComponent<BulletControl>()._direction.x
-                        = -Bullet_Ins.GetComponent<BulletControl>()._direction.x;
                 timer = 0;
                 delay = 1;
             }
