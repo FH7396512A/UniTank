@@ -5,32 +5,51 @@ public class MainCamCtrl : MonoBehaviour
 {
     public GameObject A;
     Transform AT;
-    [SerializeField] float ZoomSpeed = 0f; //줌속도
-    [SerializeField] float ZoomMax = 0f; //최대줌(가깝게)
-    [SerializeField] float ZoomMin = 0f; //최소줌(멀게)
 
+    private float ZoomMax = 10f;
+    private float ZoomMin = 4f;
+    public bool checkZoomOut = false;
+    private float CameraSpeed = 0.5f;
+    private Vector3 CameraOffset = new Vector3(0, 0, 0);
+    private float WorldWidth = 37.5f;
+   
     void Start()
     {
         AT = A.transform;
     }
     void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, AT.position, 2f * Time.deltaTime);
-        transform.Translate(0, 0, -10);
-
+        
+        if (checkZoomOut == true)
+        {
+            transform.position = AT.position + CameraOffset;
+            transform.Translate(0, 0, -10);
+            if (Input.GetKey(KeyCode.LeftArrow) && transform.position.x > 5f) CameraOffset.x -= CameraSpeed;
+            if (Input.GetKey(KeyCode.RightArrow) && transform.position.x < WorldWidth) CameraOffset.x += CameraSpeed;
+        }
+        else
+        {
+            CameraOffset.x = 0f;
+            transform.position = Vector3.Lerp(transform.position, AT.position + CameraOffset, 2f * Time.deltaTime);
+            transform.Translate(0, 0, -10);
+        }
         CameraZoom();
-
     }
 
     void CameraZoom()
     {
-        float ZoomDir = Input.GetAxis("Mouse ScrollWheel");
-
-        if (GetComponent<Camera>().orthographicSize <= ZoomMax && ZoomDir > 0)                 
-            return;       
-        if (GetComponent<Camera>().orthographicSize >= ZoomMin && ZoomDir < 0)                   
-            return;
-                    
-        GetComponent<Camera>().orthographicSize += ZoomDir * -ZoomSpeed;
+        if (Input.GetKeyDown(KeyCode.C) == true)
+        {
+            if (checkZoomOut == false)
+            {
+                GetComponent<Camera>().orthographicSize = ZoomMax;
+                checkZoomOut = true;
+            }
+            else if (checkZoomOut == true)
+            {
+                GetComponent<Camera>().orthographicSize = ZoomMin;
+                checkZoomOut = false;
+            }
+        }
     }
 }

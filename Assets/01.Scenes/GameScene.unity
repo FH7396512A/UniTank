@@ -270,9 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   A: {fileID: 115004308}
-  ZoomSpeed: 4
-  ZoomMax: 3
-  ZoomMin: 25
+  checkZoomOut: 0
 --- !u!1 &273722899
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,6 +463,7 @@ MonoBehaviour:
     type: 3}
   canvas: {fileID: 708576971}
   WheelRotateSpeed: 140
+  CameraObject: {fileID: 243159271}
   _Bullet: {fileID: 1236072881962123277, guid: 959cff56e44b5c741baf99f45aff2c07, type: 3}
 --- !u!70 &448593665
 CapsuleCollider2D:

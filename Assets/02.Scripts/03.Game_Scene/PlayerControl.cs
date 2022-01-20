@@ -23,6 +23,8 @@ public class PlayerControl : MonoBehaviour
     Slider HPBar_I;
     Slider MVBar_I;
     public float WheelRotateSpeed = 100f;
+    public GameObject CameraObject;
+    
 
     public GameObject _Bullet;
     int delay = 0;
@@ -66,51 +68,56 @@ public class PlayerControl : MonoBehaviour
 
     void OnKeyboard()
     {
-        //upArrow 누를 때 포신 기울기 조절 (수평~수직 범위)
-        if (Input.GetKey(KeyCode.UpArrow) && _angle < 70f)
+        if (CameraObject.GetComponent<MainCamCtrl>().checkZoomOut == false)
         {
-            _angle += rotateSpeed * Time.deltaTime;
-            transform.GetChild(0).GetComponent<Transform>().RotateAround(
-                transform.GetChild(2).GetComponent<Transform>().position, Vector3.forward, rotateSpeed * Time.deltaTime * isRight);
-        }
-        //downArrow 누를 때 포신 기울기 조절 (수평~수직 범위)
-        if (Input.GetKey(KeyCode.DownArrow) && _angle > -20f)
-        {
-            _angle -= rotateSpeed * Time.deltaTime;
-            transform.GetChild(0).GetComponent<Transform>().RotateAround(
-                transform.GetChild(2).GetComponent<Transform>().position, Vector3.back, rotateSpeed * Time.deltaTime * isRight);
-        }
-        //rightArrow 누를 때 오른쪽 이동 / sprite 복구
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            isRight = 1;
-            //_move -= 1;
-            transform.localScale = new Vector3(0.5f, 0.5f, 1);
-            if (_move > 0) transform.position += Vector3.right * Time.deltaTime * _speed;
-            transform.GetChild(4).Rotate(0, 0, -Time.deltaTime * WheelRotateSpeed, Space.Self);
-            transform.GetChild(5).Rotate(0, 0, -Time.deltaTime * WheelRotateSpeed, Space.Self);
-        }
-        //leftArrow 누를 때 왼쪽 이동 / sprite 반전
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            isRight = -1;
-            //_move -= 1;
-            transform.localScale = new Vector3(-0.5f, 0.5f, 1);
-            if (_move > 0) transform.position += Vector3.left * Time.deltaTime * _speed;
-            transform.GetChild(4).Rotate(0, 0, -Time.deltaTime * WheelRotateSpeed, Space.Self);
-            transform.GetChild(5).Rotate(0, 0, -Time.deltaTime * WheelRotateSpeed, Space.Self);
-        }
-        if (Input.GetKey(KeyCode.Space))
-        {
-            if (delay == 0)
+            //upArrow 누를 때 포신 기울기 조절 (수평~수직 범위)
+            if (Input.GetKey(KeyCode.UpArrow) && _angle < 70f)
             {
-                GameObject Bullet_Ins = Instantiate(_Bullet, transform.GetChild(0).GetChild(0));
-                Vector3 a = transform.GetChild(0).GetChild(0).GetComponent<Transform>().position;
-                Vector3 b = transform.GetChild(2).GetComponent<Transform>().position;
-                Bullet_Ins.GetComponent<BulletControl>()._direction = a - b;
-                timer = 0;
-                delay = 1;
+                _angle += rotateSpeed * Time.deltaTime;
+                transform.GetChild(0).GetComponent<Transform>().RotateAround(
+                    transform.GetChild(2).GetComponent<Transform>().position, Vector3.forward, rotateSpeed * Time.deltaTime * isRight);
+            }
+            //downArrow 누를 때 포신 기울기 조절 (수평~수직 범위)
+            if (Input.GetKey(KeyCode.DownArrow) && _angle > -20f)
+            {
+                _angle -= rotateSpeed * Time.deltaTime;
+                transform.GetChild(0).GetComponent<Transform>().RotateAround(
+                    transform.GetChild(2).GetComponent<Transform>().position, Vector3.back, rotateSpeed * Time.deltaTime * isRight);
+            }
+            //rightArrow 누를 때 오른쪽 이동 / sprite 복구
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                isRight = 1;
+                //_move -= 1;
+                transform.localScale = new Vector3(0.5f, 0.5f, 1);
+                if (_move > 0) transform.position += Vector3.right * Time.deltaTime * _speed;
+                transform.GetChild(4).Rotate(0, 0, -Time.deltaTime * WheelRotateSpeed, Space.Self);
+                transform.GetChild(5).Rotate(0, 0, -Time.deltaTime * WheelRotateSpeed, Space.Self);
+            }
+            //leftArrow 누를 때 왼쪽 이동 / sprite 반전
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                isRight = -1;
+                //_move -= 1;
+                transform.localScale = new Vector3(-0.5f, 0.5f, 1);
+                if (_move > 0) transform.position += Vector3.left * Time.deltaTime * _speed;
+                transform.GetChild(4).Rotate(0, 0, -Time.deltaTime * WheelRotateSpeed, Space.Self);
+                transform.GetChild(5).Rotate(0, 0, -Time.deltaTime * WheelRotateSpeed, Space.Self);
+            }
+            if (Input.GetKey(KeyCode.Space))
+            {
+                if (delay == 0)
+                {
+                    GameObject Bullet_Ins = Instantiate(_Bullet, transform.GetChild(0).GetChild(0));
+                    Vector3 a = transform.GetChild(0).GetChild(0).GetComponent<Transform>().position;
+                    Vector3 b = transform.GetChild(2).GetComponent<Transform>().position;
+                    Bullet_Ins.GetComponent<BulletControl>()._direction = a - b;
+                    timer = 0;
+                    delay = 1;
+                }
             }
         }
+        else
+            return;
     }
 }

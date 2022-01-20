@@ -11,8 +11,10 @@ public class GroundMap : MonoBehaviour
     float worldWidth, worldHeight;
     int pixelWidth, pixelHeight;
 
+
     void Start()
     {
+
 
         //원래 있는 스프라이트를 복사해서 맵 스프라이트를 생성하고 자동으로 collider를 달고 나오는 코드입니다
 
@@ -39,6 +41,8 @@ public class GroundMap : MonoBehaviour
 
         gameObject.AddComponent<PolygonCollider2D>();
         //2D 폴리곤 Collider 컴포넌트 추가
+
+        
     }
 
     
