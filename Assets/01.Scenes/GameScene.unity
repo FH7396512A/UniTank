@@ -461,10 +461,14 @@ MonoBehaviour:
   _HpBar: {fileID: 508050644507899680, guid: 3eff87c1ca460854d91ec6b6557da844, type: 3}
   _MoveBar: {fileID: 1539039734072835715, guid: df141d9453a748e42a4dc0eb6e46c8b7,
     type: 3}
+  _AngleIndicate: {fileID: 8784223330080298848, guid: bda6e29ddfb17014fbbf6704c20a348b,
+    type: 3}
   canvas: {fileID: 708576971}
+  BTank_C_cannon: {fileID: 2098847558}
   WheelRotateSpeed: 140
   CameraObject: {fileID: 243159271}
   _Bullet: {fileID: 1236072881962123277, guid: 959cff56e44b5c741baf99f45aff2c07, type: 3}
+  asdf: 0
 --- !u!70 &448593665
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

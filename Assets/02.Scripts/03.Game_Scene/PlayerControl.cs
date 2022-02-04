@@ -10,25 +10,34 @@ public class PlayerControl : MonoBehaviour
     int isRight;            //방향 변수 right = 1, left = -1
     float _angle;
 
+    
+
     private float _hp, _maxhp;
     private float _move, _maxmove;
+    private float _maxangleIndi;
     [SerializeField]
     public GameObject _PlayerInfo;
     public Slider _HpBar;
     public Slider _MoveBar;
+    public Slider _AngleIndicate;
     public GameObject canvas;
+    public GameObject BTank_C_cannon;
     RectTransform HPBar_t;
     RectTransform MVBar_t;
     RectTransform NameUI_t;
     Slider HPBar_I;
     Slider MVBar_I;
+    Slider AngleIndicate_I;
     public float WheelRotateSpeed = 100f;
     public GameObject CameraObject;
-    
 
     public GameObject _Bullet;
     int delay = 0;
     float timer = 0;
+
+    float radA, radB;
+    public float asdf;
+
     void Start()
     {
         Managers.Input.KeyAction -= OnKeyboard;
@@ -41,6 +50,9 @@ public class PlayerControl : MonoBehaviour
         _move = 100;
         _maxhp = 100;
         _hp = 100;
+        _maxangleIndi = 100;
+        
+       
 
         Slider HPB = Instantiate(_HpBar, canvas.transform);
         HPBar_t = HPB.GetComponent<RectTransform>();
@@ -49,6 +61,11 @@ public class PlayerControl : MonoBehaviour
         MVBar_t = MVB.GetComponent<RectTransform>();
         MVBar_I = MVB;
         NameUI_t = Instantiate(_PlayerInfo, canvas.transform).GetComponent<RectTransform>();
+        Slider AIndi = Instantiate(_AngleIndicate, canvas.transform);
+        AngleIndicate_I = AIndi;       
+        
+
+
     }
 
     void Update()
@@ -61,6 +78,25 @@ public class PlayerControl : MonoBehaviour
         NameUI_t.position = NameUIPos;
         HPBar_I.value = _hp / _maxhp;
         MVBar_I.value = _move / _maxmove;
+        Vector3 a = transform.GetChild(0).GetChild(0).GetComponent<Transform>().position;
+        Vector3 b = transform.GetChild(2).GetComponent<Transform>().position;
+
+        if (isRight == 1)
+        {
+            radA = Mathf.Atan2(a.y - b.y, a.x - b.x);
+            radB = radA * 180 / Mathf.PI;
+            AngleIndicate_I.value = radB * 1.111f / _maxangleIndi;
+        }
+        else
+        {
+            radA = Mathf.Atan2(a.y - b.y, -(a.x - b.x));
+            radB = radA * 180 / Mathf.PI;
+            AngleIndicate_I.value = radB * 1.111f / _maxangleIndi;
+        }
+        
+
+
+        asdf = radB;
 
         if (timer <= 120) timer += 1;
         if (timer > 120) delay = 0;
