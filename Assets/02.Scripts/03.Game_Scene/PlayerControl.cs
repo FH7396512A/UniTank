@@ -78,6 +78,7 @@ public class PlayerControl : MonoBehaviour
         NameUI_t.position = NameUIPos;
         HPBar_I.value = _hp / _maxhp;
         MVBar_I.value = _move / _maxmove;
+
         Vector3 a = transform.GetChild(0).GetChild(0).GetComponent<Transform>().position;
         Vector3 b = transform.GetChild(2).GetComponent<Transform>().position;
 
@@ -94,7 +95,6 @@ public class PlayerControl : MonoBehaviour
             AngleIndicate_I.value = radB * 1.111f / _maxangleIndi;
         }
         
-
 
         asdf = radB;
 
