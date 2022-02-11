@@ -27,18 +27,21 @@ public class BulletControl : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        //Instantiate(Boom, this.transform.position, Quaternion.identity);
-        //Destroy(this.gameObject);
+        Instantiate(Boom, this.transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
     }
 
     void Update()
     {       
+        /*
         RaycastHit2D hits;
         hits = Physics2D.Raycast(transform.position, Vector3.down);       
         Debug.DrawRay(transform.position, Vector3.down * 5, Color.red);
-        
+
         //timer += 1 * Time.deltaTime;
-        if (hits == null) return;        
+
+        
+        if (hits == null) return;       
         else
         {
             if (hits.distance < 100)
@@ -52,7 +55,8 @@ public class BulletControl : MonoBehaviour
                 }
             }
         }    
-            
+        */
+
 
         _ST = _ST + _Pos * Time.deltaTime * moveSpeed - _Gravity;
         transform.position = _ST;

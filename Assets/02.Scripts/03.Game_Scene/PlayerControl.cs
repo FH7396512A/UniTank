@@ -31,12 +31,15 @@ public class PlayerControl : MonoBehaviour
     public float WheelRotateSpeed = 100f;
     public GameObject CameraObject;
 
+    LineRenderer LR;
+    
+
     public GameObject _Bullet;
     int delay = 0;
     float timer = 0;
 
     float radA, radB;
-    public float asdf;
+    
 
     void Start()
     {
@@ -51,8 +54,10 @@ public class PlayerControl : MonoBehaviour
         _maxhp = 100;
         _hp = 100;
         _maxangleIndi = 100;
+
         
-       
+        
+
 
         Slider HPB = Instantiate(_HpBar, canvas.transform);
         HPBar_t = HPB.GetComponent<RectTransform>();
@@ -63,9 +68,7 @@ public class PlayerControl : MonoBehaviour
         NameUI_t = Instantiate(_PlayerInfo, canvas.transform).GetComponent<RectTransform>();
         Slider AIndi = Instantiate(_AngleIndicate, canvas.transform);
         AngleIndicate_I = AIndi;       
-        
-
-
+        LR = GetComponent<LineRenderer>();
     }
 
     void Update()
@@ -81,12 +84,16 @@ public class PlayerControl : MonoBehaviour
 
         Vector3 a = transform.GetChild(0).GetChild(0).GetComponent<Transform>().position;
         Vector3 b = transform.GetChild(2).GetComponent<Transform>().position;
+        //Vector3 a = transform.GetChild(0).GetChild(0).GetComponent<Transform>().localPosition;
+        //Vector3 b = transform.GetChild(2).GetComponent<Transform>().localPosition;
+        
 
         if (isRight == 1)
         {
             radA = Mathf.Atan2(a.y - b.y, a.x - b.x);
             radB = radA * 180 / Mathf.PI;
             AngleIndicate_I.value = radB * 1.111f / _maxangleIndi;
+            
         }
         else
         {
@@ -94,9 +101,10 @@ public class PlayerControl : MonoBehaviour
             radB = radA * 180 / Mathf.PI;
             AngleIndicate_I.value = radB * 1.111f / _maxangleIndi;
         }
-        
+            
+        LR.SetPosition(0, transform.GetChild(0).GetChild(1).GetComponent<Transform>().position); 
+        LR.SetPosition(1, transform.GetChild(0).GetChild(2).GetComponent<Transform>().position);
 
-        asdf = radB;
 
         if (timer <= 120) timer += 1;
         if (timer > 120) delay = 0;
