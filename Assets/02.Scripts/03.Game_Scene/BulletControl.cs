@@ -8,8 +8,8 @@ public class BulletControl : MonoBehaviour
     public Vector3 _direction;
     public GameObject Boom;
     public Collider2D Tank;
-    private float moveSpeed = 20.0f;
-    private float _G = 0.005f;
+    private float moveSpeed = 10.0f; //20.0f
+    private float _G = 0.0025f; //0.005f
     private Vector3 _Pos;
     private Vector3 _ST;
     private Vector3 _Gravity = new Vector3(0, 0, 0);
@@ -32,31 +32,9 @@ public class BulletControl : MonoBehaviour
     }
 
     void Update()
-    {       
-        /*
-        RaycastHit2D hits;
-        hits = Physics2D.Raycast(transform.position, Vector3.down);       
-        Debug.DrawRay(transform.position, Vector3.down * 5, Color.red);
-
-        //timer += 1 * Time.deltaTime;
-
-        
-        if (hits == null) return;       
-        else
-        {
-            if (hits.distance < 100)
-            {
-                if (hits.collider == Tank) return;
-                else
-                {
-                    Instantiate(Boom, this.transform.position, Quaternion.identity);
-                    Destroy(this.gameObject);
-                    Debug.Log(hits.distance, hits.collider);
-                }
-            }
-        }    
-        */
-
+    {
+        //_ST = _ST + _Pos * Time.deltaTime * moveSpeed - _Gravity;
+        //transform.position = Vector3.Slerp(this.transform.position, _ST, 0.5f);
 
         _ST = _ST + _Pos * Time.deltaTime * moveSpeed - _Gravity;
         transform.position = _ST;

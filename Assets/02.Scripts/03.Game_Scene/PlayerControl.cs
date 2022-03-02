@@ -31,6 +31,7 @@ public class PlayerControl : MonoBehaviour
     public float WheelRotateSpeed = 100f;
     public GameObject CameraObject;
 
+
     LineRenderer LR;
     
 
@@ -88,11 +89,14 @@ public class PlayerControl : MonoBehaviour
         //Vector3 b = transform.GetChild(2).GetComponent<Transform>().localPosition;
         
 
+
         if (isRight == 1)
         {
             radA = Mathf.Atan2(a.y - b.y, a.x - b.x);
             radB = radA * 180 / Mathf.PI;
             AngleIndicate_I.value = radB * 1.111f / _maxangleIndi;
+
+            
             
         }
         else
