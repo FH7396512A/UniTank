@@ -498,6 +498,7 @@ MonoBehaviour:
   BTank_C_cannon: {fileID: 2098847558}
   WheelRotateSpeed: 140
   CameraObject: {fileID: 243159271}
+  UI: {fileID: 4914370191301261321, guid: 32ca8d17d1f2d7b4bac0c05336d27b96, type: 3}
   _Bullet: {fileID: 1236072881962123277, guid: 959cff56e44b5c741baf99f45aff2c07, type: 3}
 --- !u!70 &448593665
 CapsuleCollider2D:

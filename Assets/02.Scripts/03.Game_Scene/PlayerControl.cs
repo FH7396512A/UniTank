@@ -30,6 +30,8 @@ public class PlayerControl : MonoBehaviour
     Slider AngleIndicate_I;
     public float WheelRotateSpeed = 100f;
     public GameObject CameraObject;
+    public GameObject UI;
+    
 
 
     LineRenderer LR;
@@ -68,8 +70,11 @@ public class PlayerControl : MonoBehaviour
         MVBar_I = MVB;
         NameUI_t = Instantiate(_PlayerInfo, canvas.transform).GetComponent<RectTransform>();
         Slider AIndi = Instantiate(_AngleIndicate, canvas.transform);
-        AngleIndicate_I = AIndi;       
+        AngleIndicate_I = AIndi;
         LR = GetComponent<LineRenderer>();
+        GameObject UII = Instantiate(UI, canvas.transform);
+        
+
     }
 
     void Update()
@@ -94,10 +99,7 @@ public class PlayerControl : MonoBehaviour
         {
             radA = Mathf.Atan2(a.y - b.y, a.x - b.x);
             radB = radA * 180 / Mathf.PI;
-            AngleIndicate_I.value = radB * 1.111f / _maxangleIndi;
-
-            
-            
+            AngleIndicate_I.value = radB * 1.111f / _maxangleIndi;           
         }
         else
         {
@@ -168,4 +170,5 @@ public class PlayerControl : MonoBehaviour
         else
             return;
     }
+    
 }
