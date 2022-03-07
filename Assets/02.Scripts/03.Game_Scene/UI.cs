@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
@@ -29,5 +30,10 @@ public class UI : MonoBehaviour
     {
         Application.Quit();
         Debug.Log("GameQuit Clicked!");
+    }
+    public void BackToLobbyButtonClicked()
+    {
+        SceneManager.LoadScene("Lobby");
+        Debug.Log("BackToMenu Clicked!");
     }
 }
