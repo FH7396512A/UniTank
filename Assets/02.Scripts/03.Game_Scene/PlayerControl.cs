@@ -156,19 +156,38 @@ public class PlayerControl : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.Space))
             {
-                if (delay == 0)
+                if (GameObject.Find("UI(Clone)").GetComponent<UI>().SkillDSON == false)
                 {
-                    GameObject Bullet_Ins = Instantiate(_Bullet, transform.GetChild(0).GetChild(0));
-                    Vector3 a = transform.GetChild(0).GetChild(0).GetComponent<Transform>().position;
-                    Vector3 b = transform.GetChild(2).GetComponent<Transform>().position;
-                    Bullet_Ins.GetComponent<BulletControl>()._direction = a - b;
-                    timer = 0;
-                    delay = 1;
+                    if (delay == 0)
+                    {
+                        CannonShot();
+                    }
                 }
+                else if (GameObject.Find("UI(Clone)").GetComponent<UI>().SkillDSON == true)
+                {
+                    if (delay == 0)
+                    {
+                        CannonShot();
+                        Invoke("CannonShot", 0.2f);
+                        //GameObject.Find("UI(Clone)").GetComponent<UI>().SkillDSCounter -= 1;
+                    }
+                }
+                
+
             }
         }
         else
             return;
+    }
+
+    public void CannonShot()
+    {
+        GameObject Bullet_Ins = Instantiate(_Bullet, transform.GetChild(0).GetChild(0));
+        Vector3 a = transform.GetChild(0).GetChild(0).GetComponent<Transform>().position;
+        Vector3 b = transform.GetChild(2).GetComponent<Transform>().position;
+        Bullet_Ins.GetComponent<BulletControl>()._direction = a - b;
+        timer = 0;
+        delay = 1;
     }
     
 }
