@@ -12,27 +12,37 @@ public class MainCamCtrl : MonoBehaviour
     private float CameraSpeed = 0.5f;
     private Vector3 CameraOffset = new Vector3(0, 0, 0);
     private float WorldWidth = 37.5f;
-   
+
+    public bool shootstatus;
+
     void Start()
     {
+        shootstatus = false;
         AT = A.transform;
     }
     void Update()
     {
-        
-        if (checkZoomOut == true)
+        if (shootstatus == true)
         {
-            transform.position = AT.position + CameraOffset;
-            transform.Translate(0, 0, -10);
-            if (Input.GetKey(KeyCode.LeftArrow) && transform.position.x > 5f) CameraOffset.x -= CameraSpeed;
-            if (Input.GetKey(KeyCode.RightArrow) && transform.position.x < WorldWidth) CameraOffset.x += CameraSpeed;
+            transform.position = GameObject.Find("Bullet(Clone)").GetComponent<Transform>().position;
         }
-        else
+        else if (shootstatus == false)
         {
-            CameraOffset.x = 0f;
-            transform.position = Vector3.Lerp(transform.position, AT.position + CameraOffset, 2f * Time.deltaTime);
-            transform.Translate(0, 0, -10);
+            if (checkZoomOut == true)
+            {
+                transform.position = AT.position + CameraOffset;
+                transform.Translate(0, 0, -10);
+                if (Input.GetKey(KeyCode.LeftArrow) && transform.position.x > 5f) CameraOffset.x -= CameraSpeed;
+                if (Input.GetKey(KeyCode.RightArrow) && transform.position.x < WorldWidth) CameraOffset.x += CameraSpeed;
+            }
+            else
+            {
+                CameraOffset.x = 0f;
+                transform.position = Vector3.Lerp(transform.position, AT.position + CameraOffset, 2f * Time.deltaTime);
+                transform.Translate(0, 0, -10);
+            }
         }
+
         CameraZoom();
     }
 

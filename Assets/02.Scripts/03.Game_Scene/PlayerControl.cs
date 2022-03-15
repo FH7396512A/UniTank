@@ -32,6 +32,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject CameraObject;
     public GameObject UI;
     
+    
 
 
     LineRenderer LR;
@@ -183,6 +184,7 @@ public class PlayerControl : MonoBehaviour
     public void CannonShot()
     {
         GameObject Bullet_Ins = Instantiate(_Bullet, transform.GetChild(0).GetChild(0));
+        GameObject.Find("Main Camera").GetComponent<MainCamCtrl>().shootstatus = true;
         Vector3 a = transform.GetChild(0).GetChild(0).GetComponent<Transform>().position;
         Vector3 b = transform.GetChild(2).GetComponent<Transform>().position;
         Bullet_Ins.GetComponent<BulletControl>()._direction = a - b;
