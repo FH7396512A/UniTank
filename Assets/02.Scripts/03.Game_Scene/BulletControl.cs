@@ -28,6 +28,7 @@ public class BulletControl : MonoBehaviour
     void OnCollisionEnter2D(Collision2D coll)
     {
         GameObject.Find("Main Camera").GetComponent<MainCamCtrl>().shootstatus = false;
+        GameObject.Find("Main Camera").GetComponent<Camera>().orthographicSize = 4f;
         Instantiate(Boom, this.transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }

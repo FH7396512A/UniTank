@@ -25,9 +25,12 @@ public class MainCamCtrl : MonoBehaviour
         if (shootstatus == true)
         {
             transform.position = GameObject.Find("Bullet(Clone)").GetComponent<Transform>().position;
+            transform.Translate(0, 0, -10);
+            GetComponent<Camera>().orthographicSize = ZoomMax;
         }
         else if (shootstatus == false)
         {
+            
             if (checkZoomOut == true)
             {
                 transform.position = AT.position + CameraOffset;
