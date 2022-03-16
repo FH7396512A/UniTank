@@ -4,7 +4,7 @@ using System.Collections;
 public class MainCamCtrl : MonoBehaviour
 {
     public GameObject A;
-    Transform AT;
+    public Transform AT;
 
     private float ZoomMax = 10f;
     private float ZoomMin = 4f;
@@ -17,6 +17,7 @@ public class MainCamCtrl : MonoBehaviour
 
     void Start()
     {
+        
         shootstatus = false;
         AT = A.transform;
     }

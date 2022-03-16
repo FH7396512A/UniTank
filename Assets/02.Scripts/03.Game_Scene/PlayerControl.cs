@@ -47,6 +47,8 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
+        CameraObject = GameObject.Find("Main Camera");
+        canvas = GameObject.Find("Canvas");
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
         isRight = 1;

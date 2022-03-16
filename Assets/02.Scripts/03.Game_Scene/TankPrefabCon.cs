@@ -10,6 +10,8 @@ public class TankPrefabCon : MonoBehaviour
     void Start()
     {
         Instantiate(Tank);
+        GameObject.Find("Main Camera").GetComponent<MainCamCtrl>().A = GameObject.Find("CameraPos");
+        GameObject.Find("Main Camera").GetComponent<MainCamCtrl>().AT = GameObject.Find("Main Camera").GetComponent<MainCamCtrl>().A.transform;
     }
 
     // Update is called once per frame

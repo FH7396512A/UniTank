@@ -20,7 +20,7 @@ public class BulletControl : MonoBehaviour
     void Start()
     {
         //timer = 0f;
-        Tank = GameObject.Find("Tank").GetComponent<Collider2D>();
+        Tank = GameObject.Find("Tank(Clone)").GetComponent<Collider2D>();
         _Pos = _direction;
         _ST = transform.position;
     }
