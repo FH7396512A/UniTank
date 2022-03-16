@@ -192,6 +192,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
     }
 
+    public void ClickedStartButton()
+    {
+        if (PhotonNetwork.IsMasterClient == true)
+        {
+            PhotonNetwork.LoadLevel("GameScene");
+        }
+        else
+        {
+            //
+        }
+    }
+
 
     public override void OnJoinedRoom()
     {
