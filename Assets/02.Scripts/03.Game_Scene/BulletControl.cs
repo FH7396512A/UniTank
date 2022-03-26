@@ -11,7 +11,7 @@ public class BulletControl : MonoBehaviour
     private float moveSpeed = 10.0f; //20.0f
     private float _G = 0.0025f; //0.005f
     private Vector3 _Pos;
-    private Vector3 _ST;
+    public Vector3 _ST;
     private Vector3 _Gravity = new Vector3(0, 0, 0);
 
     
@@ -27,8 +27,7 @@ public class BulletControl : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        GameObject.Find("Main Camera").GetComponent<MainCamCtrl>().shootstatus = false;
-        GameObject.Find("Main Camera").GetComponent<Camera>().orthographicSize = 4f;
+        //Invoke("DelayFuncCamera", 0.5f);      
         Instantiate(Boom, this.transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }
@@ -44,5 +43,11 @@ public class BulletControl : MonoBehaviour
         
     }
 
-
+    /*
+    void DelayFuncCamera()
+    {
+        GameObject.Find("Main Camera").GetComponent<MainCamCtrl>().shootstatus = false;
+        GameObject.Find("Main Camera").GetComponent<Camera>().orthographicSize = 4f;
+    }
+    */
 }

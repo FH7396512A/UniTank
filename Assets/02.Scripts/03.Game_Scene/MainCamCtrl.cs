@@ -9,11 +9,13 @@ public class MainCamCtrl : MonoBehaviour
     private float ZoomMax = 10f;
     private float ZoomMin = 4f;
     public bool checkZoomOut = false;
+    public bool shootstatus;
     private float CameraSpeed = 0.5f;
     private Vector3 CameraOffset = new Vector3(0, 0, 0);
     private float WorldWidth = 37.5f;
+    private Vector3 BoomCamera = new Vector3(0, 0, 0);
+    private Vector3 BoomCameraIni = new Vector3(0, 0, 0);
 
-    public bool shootstatus;
 
     void Start()
     {
@@ -25,7 +27,17 @@ public class MainCamCtrl : MonoBehaviour
     {
         if (shootstatus == true)
         {
-            transform.position = GameObject.Find("Bullet(Clone)").GetComponent<Transform>().position;
+            if (GameObject.Find("Bullet(Clone)") == null)
+            {
+                Invoke("DelayFuncCamera", 0.5f);
+            }
+            else
+            {
+                BoomCameraIni = GameObject.Find("Bullet(Clone)").GetComponent<Transform>().position;
+                BoomCamera = GameObject.Find("Bullet(Clone)").GetComponent<BulletControl>()._ST;
+            }
+
+            transform.position = Vector3.Lerp(BoomCameraIni, BoomCamera, 10f * Time.deltaTime);
             transform.Translate(0, 0, -10);
             GetComponent<Camera>().orthographicSize = ZoomMax;
         }
@@ -48,6 +60,7 @@ public class MainCamCtrl : MonoBehaviour
         }
 
         CameraZoom();
+
     }
 
     void CameraZoom()
@@ -66,4 +79,12 @@ public class MainCamCtrl : MonoBehaviour
             }
         }
     }
+
+    void DelayFuncCamera()
+    {
+        shootstatus = false;
+        GetComponent<Camera>().orthographicSize = 4f;
+    }
+
+
 }

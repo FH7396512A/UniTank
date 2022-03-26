@@ -43,6 +43,7 @@ public class PlayerControl : MonoBehaviour
     float timer = 0;
 
     float radA, radB;
+    public bool RazorBeamz;
     
 
     void Start()
@@ -54,6 +55,7 @@ public class PlayerControl : MonoBehaviour
         isRight = 1;
         transform.localScale = new Vector3(0.5f, 0.5f, 1);
         _angle = 0;
+        RazorBeamz = false;
 
         _maxmove = 100;
         _move = 100;
@@ -110,10 +112,12 @@ public class PlayerControl : MonoBehaviour
             radB = radA * 180 / Mathf.PI;
             AngleIndicate_I.value = radB * 1.111f / _maxangleIndi;
         }
-            
-        LR.SetPosition(0, transform.GetChild(0).GetChild(1).GetComponent<Transform>().position); 
+        LR.startColor = Color.green;
+        LR.endColor = Color.green;
+        LR.SetPosition(0, transform.GetChild(0).GetChild(1).GetComponent<Transform>().position);
         LR.SetPosition(1, transform.GetChild(0).GetChild(2).GetComponent<Transform>().position);
-
+        
+       
 
         if (timer <= 120) timer += 1;
         if (timer > 120) delay = 0;
@@ -121,14 +125,14 @@ public class PlayerControl : MonoBehaviour
 
     void OnKeyboard()
     {
-        if (CameraObject.GetComponent<MainCamCtrl>().checkZoomOut == false)
+        if (CameraObject.GetComponent<MainCamCtrl>().checkZoomOut == false && CameraObject.GetComponent<MainCamCtrl>().shootstatus == false)
         {
             //upArrow 누를 때 포신 기울기 조절 (수평~수직 범위)
             if (Input.GetKey(KeyCode.UpArrow) && _angle < 70f)
             {
                 _angle += rotateSpeed * Time.deltaTime;
                 transform.GetChild(0).GetComponent<Transform>().RotateAround(
-                    transform.GetChild(2).GetComponent<Transform>().position, Vector3.forward, rotateSpeed * Time.deltaTime * isRight);
+                transform.GetChild(2).GetComponent<Transform>().position, Vector3.forward, rotateSpeed * Time.deltaTime * isRight);
             }
             //downArrow 누를 때 포신 기울기 조절 (수평~수직 범위)
             if (Input.GetKey(KeyCode.DownArrow) && _angle > -20f)

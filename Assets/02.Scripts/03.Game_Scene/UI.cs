@@ -7,7 +7,7 @@ using TMPro;
 
 public class UI : MonoBehaviour
 {
-    public GameObject SettingPanel, OnImg1, OffImg1;
+    public GameObject SettingPanel, OnImg1, OffImg1, YouLose;
 
     public bool SkillDSON = false;
     public TMP_Text SkillDSIndicate;
@@ -19,6 +19,7 @@ public class UI : MonoBehaviour
         SettingPanel.gameObject.SetActive(false);
         OffImg1.gameObject.SetActive(true);
         OnImg1.gameObject.SetActive(false);
+        YouLose.gameObject.SetActive(false);
         SkillDSON = false;
         SkillDSCounter = 3;
         SkillDSIndicate.text = SkillDSCounter.ToString();
@@ -28,6 +29,14 @@ public class UI : MonoBehaviour
     void Update()
     {
         SkillDSIndicate.text = SkillDSCounter.ToString();
+        if (Input.GetKeyDown(KeyCode.Escape) == true)
+        {
+            OnSettingButtonClicked();
+        }
+        if (/*hp >= 0 ||*/ GameObject.Find("Tank(Clone)").GetComponent<Transform>().position.y < -15f)
+        {
+            YouLose.gameObject.SetActive(true);
+        }
     }
 
     public void OnSettingButtonClicked()
