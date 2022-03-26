@@ -136,3 +136,5 @@ MonoBehaviour:
   _direction: {x: 0, y: 0, z: 0}
   Boom: {fileID: 5903800867157481242, guid: 0ad801e43e660124e8d18c93dea13dd2, type: 3}
   Tank: {fileID: 0}
+  moveSpeed: 8
+  _ST: {x: 0, y: 0, z: 0}

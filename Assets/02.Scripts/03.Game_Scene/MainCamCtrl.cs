@@ -24,6 +24,11 @@ public class MainCamCtrl : MonoBehaviour
         AT = A.transform;
     }
     void Update()
+    {        
+        CameraZoom();
+    }
+
+    private void LateUpdate()
     {
         if (shootstatus == true)
         {
@@ -37,13 +42,13 @@ public class MainCamCtrl : MonoBehaviour
                 BoomCamera = GameObject.Find("Bullet(Clone)").GetComponent<BulletControl>()._ST;
             }
 
-            transform.position = Vector3.Lerp(BoomCameraIni, BoomCamera, 10f * Time.deltaTime);
+            transform.position = Vector3.Lerp(BoomCameraIni, BoomCamera, 0.5f * Time.deltaTime);
             transform.Translate(0, 0, -10);
             GetComponent<Camera>().orthographicSize = ZoomMax;
         }
         else if (shootstatus == false)
         {
-            
+
             if (checkZoomOut == true)
             {
                 transform.position = AT.position + CameraOffset;
@@ -58,9 +63,6 @@ public class MainCamCtrl : MonoBehaviour
                 transform.Translate(0, 0, -10);
             }
         }
-
-        CameraZoom();
-
     }
 
     void CameraZoom()

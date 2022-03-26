@@ -57,6 +57,7 @@ public class PlayerControl : MonoBehaviour
         _angle = 0;
         RazorBeamz = false;
 
+
         _maxmove = 100;
         _move = 100;
         _maxhp = 100;
@@ -112,8 +113,11 @@ public class PlayerControl : MonoBehaviour
             radB = radA * 180 / Mathf.PI;
             AngleIndicate_I.value = radB * 1.111f / _maxangleIndi;
         }
-        LR.startColor = Color.green;
-        LR.endColor = Color.green;
+
+        Color c1 = Color.green;
+        Color c2 = Color.green;
+        LR.material = new Material(Shader.Find("Sprites/Default"));
+        LR.SetColors(c1, c2);      
         LR.SetPosition(0, transform.GetChild(0).GetChild(1).GetComponent<Transform>().position);
         LR.SetPosition(1, transform.GetChild(0).GetChild(2).GetComponent<Transform>().position);
         
