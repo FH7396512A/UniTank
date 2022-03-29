@@ -1,0 +1,92 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class MainCamCtrl : MonoBehaviour
+{
+    public GameObject A;
+    public Transform AT;
+
+    private float ZoomMax = 10f;
+    private float ZoomMin = 4f;
+    public bool checkZoomOut = false;
+    public bool shootstatus;
+    private float CameraSpeed = 0.5f;
+    private Vector3 CameraOffset = new Vector3(0, 0, 0);
+    private float WorldWidth = 37.5f;
+    private Vector3 BoomCamera = new Vector3(0, 0, 0);
+    private Vector3 BoomCameraIni = new Vector3(0, 0, 0);
+
+
+    void Start()
+    {
+        
+        shootstatus = false;
+        AT = A.transform;
+    }
+    void Update()
+    {        
+        CameraZoom();
+    }
+
+    private void LateUpdate()
+    {
+        if (shootstatus == true)
+        {
+            if (GameObject.Find("Bullet(Clone)") == null)
+            {
+                Invoke("DelayFuncCamera", 0.5f);
+            }
+            else
+            {
+                BoomCameraIni = GameObject.Find("Bullet(Clone)").GetComponent<Transform>().position;
+                BoomCamera = GameObject.Find("Bullet(Clone)").GetComponent<BulletControl>()._ST;
+            }
+
+            transform.position = Vector3.Lerp(BoomCameraIni, BoomCamera, 0.5f * Time.deltaTime);
+            transform.Translate(0, 0, -10);
+            GetComponent<Camera>().orthographicSize = ZoomMax;
+        }
+        else if (shootstatus == false)
+        {
+
+            if (checkZoomOut == true)
+            {
+                transform.position = AT.position + CameraOffset;
+                transform.Translate(0, 0, -10);
+                if (Input.GetKey(KeyCode.LeftArrow) && transform.position.x > 5f) CameraOffset.x -= CameraSpeed;
+                if (Input.GetKey(KeyCode.RightArrow) && transform.position.x < WorldWidth) CameraOffset.x += CameraSpeed;
+            }
+            else
+            {
+                CameraOffset.x = 0f;
+                transform.position = Vector3.Lerp(transform.position, AT.position + CameraOffset, 2f * Time.deltaTime);
+                transform.Translate(0, 0, -10);
+            }
+        }
+    }
+
+    void CameraZoom()
+    {
+        if (Input.GetKeyDown(KeyCode.C) == true)
+        {
+            if (checkZoomOut == false)
+            {
+                GetComponent<Camera>().orthographicSize = ZoomMax;
+                checkZoomOut = true;
+            }
+            else if (checkZoomOut == true)
+            {
+                GetComponent<Camera>().orthographicSize = ZoomMin;
+                checkZoomOut = false;
+            }
+        }
+    }
+
+    void DelayFuncCamera()
+    {
+        shootstatus = false;
+        GetComponent<Camera>().orthographicSize = 4f;
+    }
+
+
+}
