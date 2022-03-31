@@ -9,6 +9,22 @@ using UnityEngine.SceneManagement;
 
 public class PlayFabManager : MonoBehaviour
 {
+
+
+    public GameObject ErrorBackGround, LoginError, RegiError, IDError, PassError, NameError, NickError, RegiSuccess;
+
+    void Start()
+    {
+        ErrorBackGround.gameObject.SetActive(false);
+        LoginError.gameObject.SetActive(false);
+        RegiError.gameObject.SetActive(false);
+        IDError.gameObject.SetActive(false);
+        PassError.gameObject.SetActive(false);
+        NameError.gameObject.SetActive(false);
+        NickError.gameObject.SetActive(false);
+        RegiSuccess.gameObject.SetActive(false);
+    }
+
     public string _PlayFabID, _DisplayName = null;
     public InputField ID_Input, PW_Input, Create_ID_Input, Create_PW_Input, Create_Name_Input, Create_NN_Input;
     //이메일 형식
@@ -31,8 +47,19 @@ public class PlayFabManager : MonoBehaviour
         else
         {
             Debug.LogError("로그인 실패");
-            if (!Regex.IsMatch(ID_Input.text, patternID)) Debug.LogError("아이디 오류");
-            if (!Regex.IsMatch(PW_Input.text, patternPW)) Debug.LogError("패스워드 오류");
+            ErrorBackGround.gameObject.SetActive(true);
+            LoginError.gameObject.SetActive(true);
+            if (!Regex.IsMatch(ID_Input.text, patternID))
+            {
+                Debug.LogError("아이디 오류");
+                IDError.gameObject.SetActive(true);
+            }
+            if (!Regex.IsMatch(PW_Input.text, patternPW))
+            { 
+                Debug.LogError("패스워드 오류");
+                PassError.gameObject.SetActive(true);
+            }
+            Invoke("AllDisable", 2f);
         }
     }
 
@@ -48,10 +75,29 @@ public class PlayFabManager : MonoBehaviour
         else
         {
             Debug.LogError("회원가입 실패");
-            if (!Regex.IsMatch(Create_ID_Input.text, patternID)) Debug.LogError("아이디 오류");
-            if (!Regex.IsMatch(Create_PW_Input.text, patternPW)) Debug.LogError("패스워드 오류");
-            if (!Regex.IsMatch(Create_Name_Input.text, patternName)) Debug.LogError("이름 오류");
-            if (!Regex.IsMatch(Create_NN_Input.text, patternNN)) Debug.LogError("닉네임 오류");
+            ErrorBackGround.gameObject.SetActive(true);
+            RegiError.gameObject.SetActive(true);
+            if (!Regex.IsMatch(Create_ID_Input.text, patternID))
+            {
+                Debug.LogError("아이디 오류");
+                IDError.gameObject.SetActive(true);
+            }
+            if (!Regex.IsMatch(Create_PW_Input.text, patternPW))
+            {
+                Debug.LogError("패스워드 오류");
+                PassError.gameObject.SetActive(true);
+            }
+            if (!Regex.IsMatch(Create_Name_Input.text, patternName))
+            {
+                Debug.LogError("이름 오류");
+                NameError.gameObject.SetActive(true);
+            }
+            if (!Regex.IsMatch(Create_NN_Input.text, patternNN))
+            {
+                Debug.LogError("닉네임 오류");
+                NickError.gameObject.SetActive(true);
+            }
+            Invoke("AllDisable", 2f);
         }
     }
 
@@ -87,11 +133,17 @@ public class PlayFabManager : MonoBehaviour
     public void OnRegisterSuccess(RegisterPlayFabUserResult result)
     {
         Debug.Log("회원가입 성공");
+        ErrorBackGround.gameObject.SetActive(true);
+        RegiSuccess.gameObject.SetActive(true);
+        Invoke("AllDisable", 2f);
         UpdateDisplayName();
     }
     private void OnRegisterFailure(PlayFabError error)
     {
         Debug.LogError("회원가입 실패");
+        ErrorBackGround.gameObject.SetActive(true);
+        RegiError.gameObject.SetActive(true);
+        Invoke("AllDisable", 2f);
     }
 
     private void OnLoginSuccess(LoginResult result)
@@ -111,6 +163,19 @@ public class PlayFabManager : MonoBehaviour
     {
         Debug.LogError("로그인 실패");
     }
+
+    private void AllDisable()
+    {
+        ErrorBackGround.gameObject.SetActive(false);
+        LoginError.gameObject.SetActive(false);
+        RegiError.gameObject.SetActive(false);
+        IDError.gameObject.SetActive(false);
+        PassError.gameObject.SetActive(false);
+        NameError.gameObject.SetActive(false);
+        NickError.gameObject.SetActive(false);
+        RegiSuccess.gameObject.SetActive(false);
+    }
+
 }
 
 
