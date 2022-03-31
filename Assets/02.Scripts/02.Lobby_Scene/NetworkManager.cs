@@ -238,7 +238,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     #endregion
 
-
     #region 채팅 //
     public void Send()
     {

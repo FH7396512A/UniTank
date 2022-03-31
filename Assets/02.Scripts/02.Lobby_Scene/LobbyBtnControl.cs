@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
+using Photon.Realtime;
 
 
-public class LobbyBtnControl : MonoBehaviour
+public class LobbyBtnControl : MonoBehaviourPunCallbacks
 {
     public GameObject CreateBtn, CreateFinishBtn, LobbyPanel, StatusText,
-        CreateRoom;
+        CreateRoom, StartBtn;
     
 
     public void CreateBtnClicked()
@@ -22,6 +24,12 @@ public class LobbyBtnControl : MonoBehaviour
     {
         Debug.Log("Back to Main");
         SceneManager.LoadScene("Main");
+    }
+
+    [PunRPC]
+    public void StartBtnOnClicked()
+    {
+        SceneManager.LoadScene("GameScene");
     }
 }
   
