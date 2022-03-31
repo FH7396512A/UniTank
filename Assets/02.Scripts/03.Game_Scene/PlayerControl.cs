@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Realtime;
+using TMPro;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControl : MonoBehaviourPunCallbacks
 {
     float _speed = 2.0f;    //탱크 이동속도
     float rotateSpeed = 50f;//포신 각속도
     int isRight;            //방향 변수 right = 1, left = -1
     float _angle;
-
     
 
     private float _hp, _maxhp;
     private float _move, _maxmove;
     private float _maxangleIndi;
     [SerializeField]
+    public PhotonView PV;
     public GameObject _PlayerInfo;
     public Slider _HpBar;
     public Slider _MoveBar;
@@ -31,9 +34,8 @@ public class PlayerControl : MonoBehaviour
     public float WheelRotateSpeed = 100f;
     public GameObject CameraObject;
     public GameObject UI;
-    
-    
 
+    string NN;
 
     LineRenderer LR;
     
@@ -44,7 +46,6 @@ public class PlayerControl : MonoBehaviour
 
     float radA, radB;
     public bool RazorBeamz;
-    
 
     void Start()
     {
@@ -52,11 +53,13 @@ public class PlayerControl : MonoBehaviour
         canvas = GameObject.Find("Canvas");
         Managers.Input.KeyAction -= OnKeyboard;
         Managers.Input.KeyAction += OnKeyboard;
+
         isRight = 1;
         transform.localScale = new Vector3(0.5f, 0.5f, 1);
         _angle = 0;
         RazorBeamz = false;
 
+        NN = UserInfo._DisplayName;
 
         _maxmove = 100;
         _move = 100;
@@ -75,6 +78,8 @@ public class PlayerControl : MonoBehaviour
         MVBar_t = MVB.GetComponent<RectTransform>();
         MVBar_I = MVB;
         NameUI_t = Instantiate(_PlayerInfo, canvas.transform).GetComponent<RectTransform>();
+        NameUI_t.GetComponentInChildren<TMP_Text>().text = NN;
+
         Slider AIndi = Instantiate(_AngleIndicate, canvas.transform);
         AngleIndicate_I = AIndi;
         LR = GetComponent<LineRenderer>();
@@ -85,6 +90,7 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
+        //if (!PV.IsMine) return;
         Vector3 HPBarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + 1.95f, 0));
         HPBar_t.position = HPBarPos;
         Vector3 MVBarPos = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.y + 1.8f, 0));
@@ -183,8 +189,6 @@ public class PlayerControl : MonoBehaviour
                         //GameObject.Find("UI(Clone)").GetComponent<UI>().SkillDSCounter -= 1;
                     }
                 }
-                
-
             }
         }
         else

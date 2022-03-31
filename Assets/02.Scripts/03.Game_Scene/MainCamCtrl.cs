@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class MainCamCtrl : MonoBehaviour
+
+public class MainCamCtrl : MonoBehaviourPunCallbacks
 {
     public GameObject A;
     public Transform AT;
+    public PhotonView PV;
 
     private float ZoomMax = 10f;
     private float ZoomMin = 4f;
@@ -22,6 +27,7 @@ public class MainCamCtrl : MonoBehaviour
         
         shootstatus = false;
         AT = A.transform;
+
     }
     void Update()
     {        

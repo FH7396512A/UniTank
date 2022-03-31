@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class BulletControl : MonoBehaviour
+public class BulletControl : MonoBehaviourPunCallbacks
 {
     public Vector3 _direction;
     public GameObject Boom;
@@ -17,9 +19,14 @@ public class BulletControl : MonoBehaviour
     public Vector3 _ST;
     private Vector3 _Gravity = new Vector3(0, 0, 0);
 
-    
+
     //public float timer = 0f;
-    
+    void boom()
+    {
+        Instantiate(Boom, this.transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
+    }
+
     void Start()
     {
         //timer = 0f;
@@ -29,9 +36,8 @@ public class BulletControl : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D coll)
-    {     
-        Instantiate(Boom, this.transform.position, Quaternion.identity);
-        Destroy(this.gameObject);
+    {
+        boom();
     }
 
     void Update()
@@ -43,5 +49,7 @@ public class BulletControl : MonoBehaviour
         transform.position = _ST;
         _Gravity.y += _G;
         
+        if (this.transform.position.y <= -20f) boom();
     }   
 }
+

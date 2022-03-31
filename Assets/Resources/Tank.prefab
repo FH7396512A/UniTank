@@ -298,6 +298,8 @@ GameObject:
   - component: {fileID: 8931892289526844989}
   - component: {fileID: 8931892289526844991}
   - component: {fileID: 8931892289526844984}
+  - component: {fileID: -7853030413902685312}
+  - component: {fileID: 4160928349724512548}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Tank
@@ -388,7 +390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc120719798dd294385384aae30004b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _PlayerInfo: {fileID: 6155115857206128175, guid: 5d5de020293739b41bdc465140ee7ff6,
+  PV: {fileID: -7853030413902685312}
+  _PlayerInfo: {fileID: 8883808804773644398, guid: 5d5de020293739b41bdc465140ee7ff6,
     type: 3}
   _HpBar: {fileID: 508050644507899680, guid: 3eff87c1ca460854d91ec6b6557da844, type: 3}
   _MoveBar: {fileID: 1539039734072835715, guid: df141d9453a748e42a4dc0eb6e46c8b7,
@@ -401,6 +404,7 @@ MonoBehaviour:
   CameraObject: {fileID: 0}
   UI: {fileID: 4914370191301261321, guid: 32ca8d17d1f2d7b4bac0c05336d27b96, type: 3}
   _Bullet: {fileID: 1236072881962123277, guid: 959cff56e44b5c741baf99f45aff2c07, type: 3}
+  RazorBeamz: 0
 --- !u!50 &8931892289526844990
 Rigidbody2D:
   serializedVersion: 4
@@ -582,6 +586,45 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &-7853030413902685312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8931892289526845377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 4160928349724512548}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &4160928349724512548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8931892289526845377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &8931892289700110127
 GameObject:
   m_ObjectHideFlags: 0

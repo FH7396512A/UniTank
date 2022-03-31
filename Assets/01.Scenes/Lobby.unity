@@ -6112,6 +6112,7 @@ MonoBehaviour:
   LobbyPanel: {fileID: 389731378}
   StatusText: {fileID: 2091442127}
   CreateRoom: {fileID: 1752547582}
+  StartBtn: {fileID: 1768497232}
 --- !u!1 &1768497232
 GameObject:
   m_ObjectHideFlags: 0
@@ -6193,7 +6194,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1768497235}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1752547584}
+        m_MethodName: StartBtnOnClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1768497235
 MonoBehaviour:
   m_ObjectHideFlags: 0
